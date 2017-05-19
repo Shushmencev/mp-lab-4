@@ -8,23 +8,32 @@ class Tree{
 	
 	private:
 		
-		struct Multi_Node{
+		struct Node{
 			int data;
-			Multi_Node *parent;
-			vector <Multi_Node*> children;
+			Node *parent, *left, *right;
 		};
 		
 	public:
 		
+		Tree(){
+			root = NULL;
+		}
 		
+		~Tree(){
+			
+		}
+		
+		int get_node_depth(){
+			
+		}
 	
 };
 
 
 
-int main (){
+int main(){
 	
-	cout << "Hello world!!" << endl;
+	
 	
 	return 0;
 }
