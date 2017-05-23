@@ -8,40 +8,84 @@ class Tree{
 	
 	private:
 		
+		//Узел дерева:
 		struct Node{
 			int data;
 			Node *left, *right;
 		};
 		
 	public:
-		Node *root;	
+		
+		//Объявление узла:
+		Node *node;
+		
+		//Конструктор:
 		Tree(){
 			
-			
-			root = NULL;
+			node = NULL;
 		}
 		
+		//Деструктор:
 		~Tree(){
 			
 		}
 		
-		void add_node(int x){
+		//Вывод элементов дерева:
+		void show(Node *node){
 			
-			if (root == NULL){
+			cout << node->data << endl;
+			
+			if (node->left != NULL){
 				
-				root = new Node;
-				root->data = x;
-				cout << x << endl;
-				root->left = root->right = NULL;
+				node = node->left;
+				show(node);
 			}
 			
-			if (root != NULL){
+			if (node->right != NULL){
 				
-				if (x > root->data){
+				node = node->right;
+				show(node);
+			}
+		}
+		
+		//Добавление нового узла к дереву:
+		void add_node(int x){
+			
+			if (node == NULL){
+				
+				//Выделение памяти под узел:
+				node = new Node;
+				
+				//Заполнение полей:
+				node->data = x;
+				node->left = NULL;
+				node->right = NULL;
+			}
+			
+			else if (node != NULL){
+				
+				if (x < node->data &&
+					node->left == NULL
+				){
 					
-					root->left = new Node;
-					root->left->data = x;
-					root->left->left = root->left->right = NULL;
+					//Выделение памяти под узел:
+					node->left = new Node;
+					
+					//Заполнение полей:
+					node->left->data = x;
+					node->left->left = NULL;
+					node->left->right = NULL;
+				}
+				
+				else if (x >= node->data){
+					
+					//Выделение памяти под узел:
+					node->right = new Node;
+					
+					//Заполнение полей:
+					node->right->data = x;
+					node->left->left = NULL;
+					node->left->right = NULL;
 				}
 			}
 		}
@@ -56,8 +100,12 @@ class Tree{
 
 int main(){
 	
+	setlocale(LC_ALL, "Russian");
 	Tree my_tree;
 	my_tree.add_node(5);
+	my_tree.show();
+	my_tree.add_node(3);
+	my_tree.show();
 	
 	return 0;
 }
