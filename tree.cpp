@@ -73,6 +73,7 @@ class Tree{
 			}
 		}
 		
+		//¬ычисление длины дерева:
 		int get_lenght_tree(int x, Node *node){
 			
 			if (node->left != NULL){
@@ -101,6 +102,7 @@ int main(){
 	Tree my_tree;
 	
 	my_tree.add_node(5, my_tree.root);
+	cout << "Ёлементы дерева:" << endl;
 	my_tree.show(my_tree.root);
 	cout << endl;
 	
@@ -110,11 +112,12 @@ int main(){
 	my_tree.add_node(7, my_tree.root);
 	my_tree.add_node(6, my_tree.root);
 	my_tree.add_node(2, my_tree.root);
+	cout << "Ёлементы дерева:" << endl;
 	my_tree.show(my_tree.root);
 	cout << endl;
 	
 	int x = my_tree.get_lenght_tree(0, my_tree.root);
-	cout << x << endl;
+	cout << "ƒлина дерева: " << x << endl;
 	
 	return 0;
 }
