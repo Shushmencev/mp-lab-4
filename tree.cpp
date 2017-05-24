@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <ctime>
+
 using namespace std;
 
 class Tree{
@@ -93,8 +95,27 @@ class Tree{
 	
 };
 
+static inline unsigned long long int tick(){
+	
+	unsigned long long int d;
+	
+	__asm__ __volatile__("rdtsc" : "=A" (d));
+	return d;
+}
 
-
+void functions(Tree my_tree){
+		my_tree.add_node(3, my_tree.root);
+		my_tree.add_node(4, my_tree.root);
+		my_tree.add_node(5, my_tree.root);
+		my_tree.add_node(7, my_tree.root);
+		my_tree.add_node(6, my_tree.root);
+		my_tree.add_node(2, my_tree.root);
+		my_tree.add_node(11, my_tree.root);
+		my_tree.add_node(1, my_tree.root);
+		my_tree.add_node(7, my_tree.root);
+		my_tree.add_node(14, my_tree.root);
+	}
+	
 int main(){
 	
 	setlocale(LC_ALL, "Russian");
@@ -106,18 +127,23 @@ int main(){
 	my_tree.show(my_tree.root);
 	cout << endl;
 	
-	my_tree.add_node(3, my_tree.root);
-	my_tree.add_node(4, my_tree.root);
-	my_tree.add_node(5, my_tree.root);
-	my_tree.add_node(7, my_tree.root);
-	my_tree.add_node(6, my_tree.root);
-	my_tree.add_node(2, my_tree.root);
-	cout << "Ёлементы дерева:" << endl;
-	my_tree.show(my_tree.root);
-	cout << endl;
+	//1:
 	
-	int x = my_tree.get_lenght_tree(0, my_tree.root);
-	cout << "ƒлина дерева: " << x << endl;
+	
+	for (int i = 0; i < 10; i++){
+		functions(my_tree);	
+		unsigned long int y = 0;
+		for (int i = 0; i < 100; i++){
+			unsigned long long int a = tick();
+			int x = my_tree.get_lenght_tree(0, my_tree.root);
+			unsigned long long int b = tick() - a;
+			y += b;
+		}
+		double midle = y/100.0;
+		
+		cout << "—реднее значение: " << midle << endl;
+	}
+	
 	
 	return 0;
 }
